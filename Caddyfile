@@ -1,0 +1,3 @@
+airflow.livefleet.site {
+    reverse_proxy airflow-webserver:8080
+}

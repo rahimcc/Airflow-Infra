@@ -134,5 +134,22 @@ services:
         reservations:
           memory: 768M
 
+  caddy:
+    image: caddy:2-alpine
+    profiles: ["production"]
+    container_name: caddy
+    restart: unless-stopped
+    ports:
+      - "80:80"
+      - "443:443"
+    volumes:
+      - ./Caddyfile:/etc/caddy/Caddyfile
+      - caddy-data:/data
+      - caddy-config:/config
+    depends_on:
+      - dashboard
+
 volumes:
   postgres-db-volume:
+  caddy_data: {}
+  caddy_config: {}
