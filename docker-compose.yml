@@ -147,7 +147,9 @@ services:
       - caddy-data:/data
       - caddy-config:/config
     depends_on:
-      - dashboard
+       airflow-webserver:
+        condition: service_healthy
+          
 
 volumes:
   postgres-db-volume:
