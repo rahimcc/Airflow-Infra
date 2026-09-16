@@ -5,7 +5,7 @@ mkdir -p ./dags ./logs ./plugins ./config
 
 VALID_PROFILES=("dev" "production")
 
-echo ${VALID_PROFILES[@]}
+PROFILE=${1}
 
 if [[ ! " ${VALID_PROFILES[@]} " =~ " ${PROFILE} " ]]; then
   echo "Error: '$PROFILE' is not a valid profile. Choose from: ${VALID_PROFILES[*]}"
@@ -14,10 +14,14 @@ if [[ ! " ${VALID_PROFILES[@]} " =~ " ${PROFILE} " ]]; then
   exit 1
 fi
 
-PROFILE=${1}
+mkdir -p ./dags ./logs ./plugins ./config
+#echo -e "\nAIRFLOW_UID=$(id -u)" >> .env
+
 echo "Deploying with ${PROFILE} profile"
-if [[  $1 == "dev " ]]; then 
+if [[  $1 == "dev " ]]; then
+    docker compose down
     docker compose up -d --build
 else
+    docker compose --profile $PROFILE down 
     docker compose --profile $PROFILE up -d --build 
 fi
