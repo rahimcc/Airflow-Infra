@@ -1,3 +1,4 @@
+
 x-airflow-common: &airflow-common
   image: apache/airflow:2.10.5-python3.11
   environment: &airflow-common-env
@@ -153,5 +154,5 @@ services:
 
 volumes:
   postgres-db-volume:
-  caddy_data: {}
-  caddy_config: {}
+  caddy-data: {}
+  caddy-config: {}
