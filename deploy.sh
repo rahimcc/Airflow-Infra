@@ -19,9 +19,9 @@ mkdir -p ./dags ./logs ./plugins ./config
 
 echo "Deploying with ${PROFILE} profile"
 if [[  $1 == "dev " ]]; then
-    docker compose down
-    docker compose up -d --build
+    docker compose down -v
+    docker compose up --env-file .env.prod -d --build
 else
     docker compose --profile $PROFILE down 
-    docker compose --profile $PROFILE up -d --build 
+    docker compose --env-file .env.dev --profile $PROFILE up -d --build 
 fi
