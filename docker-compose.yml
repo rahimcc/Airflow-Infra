@@ -1,6 +1,7 @@
 
 x-airflow-common: &airflow-common
-  image: apache/airflow:2.10.5-python3.11
+  image: apache/airflow:3.0.6-python3.11
+  build: .
   environment: &airflow-common-env
     AIRFLOW__CORE__EXECUTOR: LocalExecutor
     AIRFLOW__DATABASE__SQL_ALCHEMY_CONN: postgresql+psycopg2://${POSTGRES_USER}:${POSTGRES_PASSWORD}@postgres/airflow
@@ -31,6 +32,9 @@ x-airflow-common: &airflow-common
     AIRFLOW__CORE__CHECK_SLAS: 'false'
     AIRFLOW__METRICS__STATSD_ON: 'false'
     _PIP_ADDITIONAL_REQUIREMENTS: ${_PIP_ADDITIONAL_REQUIREMENTS:-}
+
+    AIRFLOW__CORE__AUTH_MANAGER: airflow.providers.fab.auth_manager.fab_auth_manager.FabAuthManager
+
   volumes:
     - ${DAGS_HOST_PATH}:/opt/airflow/dags
     - ./logs:/opt/airflow/logs
@@ -74,6 +78,12 @@ services:
         reservations:
           memory: 256M
 
+  airflow-dag-processor:
+    <<: *airflow-common
+    command: dag-processor
+    restart: always
+
+
   airflow-init:
     <<: *airflow-common
     command:
@@ -93,7 +103,7 @@ services:
 
   airflow-webserver:
     <<: *airflow-common
-    command: webserver
+    command: api-server
     ports:
       - "8080:8080"
     healthcheck:

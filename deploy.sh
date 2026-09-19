@@ -18,10 +18,12 @@ mkdir -p ./dags ./logs ./plugins ./config
 #echo -e "\nAIRFLOW_UID=$(id -u)" >> .env
 
 echo "Deploying with ${PROFILE} profile"
-if [[  $1 == "dev " ]]; then
-    docker compose down -v
-    docker compose up --env-file .env.prod -d --build
+if [[  $1 == "dev" ]]; then
+    echo "============ Development ===============" 
+    docker compose --env-file .env.dev down -v
+    docker compose --env-file .env.dev up -d --build
 else
+    echo "============ Production ================"
     docker compose --profile $PROFILE down 
-    docker compose --env-file .env.dev --profile $PROFILE up -d --build 
+    docker compose --env-file .env.prod --profile $PROFILE up -d --build 
 fi
