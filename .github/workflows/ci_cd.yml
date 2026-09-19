@@ -34,7 +34,7 @@ jobs:
 
           - name: Lint DAGs
             run: | 
-                python -m py_compile dag/*.py
+                python -m py_compile dags/*.py
               
     
     build-and-push:
