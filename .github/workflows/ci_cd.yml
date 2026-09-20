@@ -95,3 +95,6 @@ jobs:
                   key: ${{ secrets.AIRFLOW_SSH_KEY }}
                   script: |
                         echo "Successful" 
+                        cd /opt/Airflow-Infra
+                        git pull origin main
+                        docker compose up -d --build
