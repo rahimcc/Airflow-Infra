@@ -78,7 +78,15 @@ jobs:
 
     deploy:
         runs-on: ubuntu-latest
+        environment: production
         steps:
+
+            - name: Debug (temporary)
+              run: 
+                echo "Host length: ${#AIRFLOW_VM_HOST}"
+              env: 
+                AIRFLOW_VM_HOST: ${{ secrets.AIRFLOW_VM_HOST }}
+
             - name: SSH and deploy  
               uses: appleboy/ssh-action@v1
               with:
