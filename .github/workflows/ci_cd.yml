@@ -97,4 +97,4 @@ jobs:
                         echo "Successful" 
                         cd /opt/Airflow-Infra
                         git pull origin main
-                        docker compose up -d --build
+                        sudo ./deploy.sh production
