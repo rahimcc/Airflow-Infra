@@ -77,14 +77,13 @@ jobs:
                 cache-to: type=gha,mode=max
 
     deploy:
-        runs-on: ubuntu:latest
+        runs-on: ubuntu-latest
         steps:
-
             - name: SSH and deploy  
-              uses: appleboy/ssh-acton@v1
+              uses: appleboy/ssh-action@v1
               with:
                   host: ${{ secrets.AIRFLOW_VM_HOST }}
-                  username: ${{ secrets.AIRFLOW_VM_USER }}
+                  username: ${{ secrets.AIRFLOW_VM_USER }}
                   key: ${{ secrets.AIRFLOW_SSH_KEY }}
                   script: |
                         echo "Successful" 
