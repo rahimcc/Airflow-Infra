@@ -9,6 +9,10 @@ x-airflow-common: &airflow-common
     AIRFLOW__DATABASE__SQL_ALCHEMY_CONN: postgresql+psycopg2://${POSTGRES_USER}:${POSTGRES_PASSWORD}@postgres/airflow
     AIRFLOW__CORE__LOAD_EXAMPLES: 'false'
     AIRFLOW__CORE__LOAD_DEFAULT_CONNECTIONS: 'false'
+    AIRFLOW__CORE__EXECUTION_API_SERVER_URL:  'http://airflow-webserver:8080/execution/'
+    
+    AIRFLOW__API_AUTH__JWT_SECRET: ${AIRFLOW__API_AUTH__JWT_SECRET}
+    AIRFLOW__API_AUTH__JWT_ISSUER: airflow
 
     # --- concurrency: keep low, we only have 1 vCPU ---
     AIRFLOW__CORE__PARALLELISM: 4
