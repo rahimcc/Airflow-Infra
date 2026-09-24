@@ -1,6 +1,6 @@
 
 x-airflow-common: &airflow-common
-  image: ghcr.io/rahimcc/airflow-infra:latest
+  image: ghcr.io/rahimcc/turyan-airflow-infra:latest
   build: .
   environment: &airflow-common-env
     AIRFLOW__CORE__EXECUTOR: LocalExecutor
