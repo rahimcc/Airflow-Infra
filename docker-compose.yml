@@ -1,8 +1,6 @@
 
 x-airflow-common: &airflow-common
   image: ghcr.io/rahimcc/airflow-infra:latest
-  env_file:
-    - ${ENV_FILE}
   build: .
   environment: &airflow-common-env
     AIRFLOW__CORE__EXECUTOR: LocalExecutor
