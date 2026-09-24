@@ -42,7 +42,7 @@ x-airflow-common: &airflow-common
     - ${DAGS_HOST_PATH}:/opt/airflow/dags
     - ./logs:/opt/airflow/logs
     - ./plugins:/opt/airflow/plugins
-    - ./config/airflow.cfg:/opt/airflow/airflow.cfg:ro
+    - ./config:/opt/airflow/config:ro
   user: "${AIRFLOW_UID:-50000}:0"
   depends_on: &airflow-common-depends-on
     postgres:
