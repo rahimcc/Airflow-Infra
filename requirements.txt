@@ -1,1 +1,9 @@
 requests
+apache-airflow-providers-common-io
+geopy
+pytest
+requests
+
+
+## Zenquote 
+numpy
